@@ -1,15 +1,4 @@
-def level (A=0,B=0):
-    if B==1:
-        return A
-    else:
-        return A*level(A,B-1)    
-    
-def sum_recursion (A,B):
-    if B==0:
-        return A
-    else:
-        return 1+sum_recursion (A,B-1)    
-
+from random import randint
 def input_data (text="Введите два числа A B: "):
     Input=input(text)
     Input=Input.split()   
@@ -19,21 +8,56 @@ def input_data (text="Введите два числа A B: "):
             Input[0]=1
     return Input
 
+def rand_array (min=0,max=10,count=10):
+    array=[]
+    for i in range(0,count):
+        array.append(randint(min,max))
+    return array
 
-# Задача 26:  Напишите программу, которая на вход принимает два числа A и B, и возводит число А в целую степень B с 
-# помощью рекурсии.
-print("Задача 26")
-Input26=input_data()
-if Input26[0]==0 and len(Input26)==3:
-    print(level(int(Input26[1]),int(Input26[2])))
-else:
-    print('Ошибка')
+def range_array (arr=[],min=0,max=10):
+    res_arr=[]
+    for i in range(0,len(arr)):
+        if arr[i]>=min and arr[i]<=max:
+            res_arr.append(i)
+    return res_arr
 
-# Задача 28: Напишите рекурсивную функцию sum(a, b), возвращающую сумму двух целых неотрицательных чисел. Из всех 
-# арифметических операций допускаются только +1 и -1. Также нельзя использовать циклы.
-print("Задача 28")
-Input28=input_data()
-if Input28[0]==0 and len(Input28)==3:
-    print(sum_recursion(int(Input28[1]),int(Input28[2])))
-else:
-    print('Ошибка')
+def ariphmetic_prog(a1,d,count):
+    res=[]
+    for i in range (1,count+1):
+        res.append(a1+(i-1)*d)
+    print(res)
+    return res
+
+
+
+# Задача 30:  Заполните массив элементами арифметической прогрессии. Её первый элемент, разность и количество элементов 
+# нужно ввести с клавиатуры. Формула для получения n-го члена прогрессии: an = a1 + (n-1) * d.
+# Каждое число вводится с новой строки.
+print("Задача 30")
+a1=input("Введите a1: ")
+while not(a1.isdigit()):
+    a1=input("Введите a1: ")
+d=input("Введите d: ")
+while not(d.isdigit()):
+    d=input("Введите d: ")
+count=input("Введите количество элементов: ")
+while not(count.isdigit()):
+    count=input("Введите количество элементов: ")
+ariphmetic_prog(int(a1),int(d),int(count))
+
+
+# Задача 32: Определить индексы элементов массива (списка), значения которых принадлежат заданному диапазону 
+# (т.е. не меньше заданного минимума и не больше заданного максимума)
+print("Задача 32")
+Input32=input_data("Введите границы диапазона: ")
+rand_arr=rand_array ()
+print(rand_arr)
+if Input32[0]==0 and len(Input32)==3:
+    if Input32[1]>Input32[2]:
+        print(range_array(rand_arr,int(Input32[2]),int(Input32[1])))   
+    elif Input32[1]<Input32[2]:
+        print(range_array(rand_arr,int(Input32[1]),int(Input32[2])))
+    elif Input32[1]==Input32[2]:
+        print('нет элементов удовлетворяющих требованиям')
+        
+
