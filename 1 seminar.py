@@ -1,63 +1,55 @@
-from random import randint
-def input_data (text="Введите два числа A B: "):
-    Input=input(text)
-    Input=Input.split()   
-    Input.insert(0,0)
-    for i in range(1,len(Input)):
-        if not(Input[i].isdigit()):
-            Input[0]=1
-    return Input
+# Задача 34:  Винни-Пух попросил Вас посмотреть, есть ли в его стихах ритм. Поскольку разобраться в его кричалках не настолько 
+# просто, насколько легко он их придумывает, Вам стоит написать программу. Винни-Пух считает, что ритм есть, если число слогов 
+# (т.е. число гласных букв) в каждой фразе стихотворения одинаковое. Фраза может состоять из одного слова, если в фразе несколько 
+# слов, то они разделяются дефисами. Фразы отделяются друг от друга пробелами. Стихотворение  Винни-Пух вбивает в программу с 
+# клавиатуры. В ответе напишите “Парам пам-пам”, если с ритмом все в порядке и “Пам парам”, если с ритмом все не в порядке
+print("Задача 34")
+input34=input("Введите фразу: ")
+list_0=list(input34)
+list_1=list(filter(lambda x: (x.isalpha()) or x=="-" or x==" " ,list_0))
+if len(list_0)==len(list_1):
+    list_1=input34.split(" ")
+    list_1=list(map(lambda x: list(x),list_1))
+    gl={"а":1,"у":1,"о":1,"ы":1,"и":1,"э":1,"я":1,"ю":1,"ё":1,"е":1,"А":1,"У":1,"О":1,"Ы":1,"и":1,"Э":1,"Я":1,"Ю":1,"Ё":1,"е":1}
+    list_0=list()
+    for i in range(len(list_1)):
+        s=0
+        for j in list_1[i]:
+            if j in gl:
+                s=s+gl[j]
+        list_0.append(s)
+    res34=True
+    for i in range(len(list_0)-1):
+        if list_0[i]!=list_0[i+1]:
+            res34=False
+    if res34==True: print("Парам пам-пам") 
+    else: print("Пам парам")        
+else: print("Ошибка")
 
-def rand_array (min=0,max=10,count=10):
-    array=[]
-    for i in range(0,count):
-        array.append(randint(min,max))
-    return array
-
-def range_array (arr=[],min=0,max=10):
-    res_arr=[]
-    for i in range(0,len(arr)):
-        if arr[i]>=min and arr[i]<=max:
-            res_arr.append(i)
-    return res_arr
-
-def ariphmetic_prog(a1,d,count):
-    res=[]
-    for i in range (1,count+1):
-        res.append(a1+(i-1)*d)
-    print(res)
-    return res
-
-
-
-# Задача 30:  Заполните массив элементами арифметической прогрессии. Её первый элемент, разность и количество элементов 
-# нужно ввести с клавиатуры. Формула для получения n-го члена прогрессии: an = a1 + (n-1) * d.
-# Каждое число вводится с новой строки.
-print("Задача 30")
-a1=input("Введите a1: ")
-while not(a1.isdigit()):
-    a1=input("Введите a1: ")
-d=input("Введите d: ")
-while not(d.isdigit()):
-    d=input("Введите d: ")
-count=input("Введите количество элементов: ")
-while not(count.isdigit()):
-    count=input("Введите количество элементов: ")
-ariphmetic_prog(int(a1),int(d),int(count))
+# Задача 36: Напишите функцию print_operation_table(operation, num_rows=6, num_columns=6), которая принимает в качестве аргумента функцию,
+# вычисляющую элемент по номеру строки и столбца. Аргументы num_rows и num_columns указывают число строк и столбцов таблицы,
+# которые должны быть распечатаны. Нумерация строк и столбцов идет с единицы (подумайте, почему не с нуля). Примечание: бинарной
+# операцией называется любая операция, у которой ровно два аргумента, как, например, у операции умножения.
 
 
-# Задача 32: Определить индексы элементов массива (списка), значения которых принадлежат заданному диапазону 
-# (т.е. не меньше заданного минимума и не больше заданного максимума)
-print("Задача 32")
-Input32=input_data("Введите границы диапазона: ")
-rand_arr=rand_array ()
-print(rand_arr)
-if Input32[0]==0 and len(Input32)==3:
-    if Input32[1]>Input32[2]:
-        print(range_array(rand_arr,int(Input32[2]),int(Input32[1])))   
-    elif Input32[1]<Input32[2]:
-        print(range_array(rand_arr,int(Input32[1]),int(Input32[2])))
-    elif Input32[1]==Input32[2]:
-        print('нет элементов удовлетворяющих требованиям')
-        
+
+def print_operation_table(operation, num_rows=6, num_сolumns=6):
+    array=[[operation(i,j) for i in range(1,num_rows+1)] for j in range(1, num_сolumns+1)]
+    for i in array:
+        print(" ".join(map(str,i)))
+print("Задача 36")
+
+rows=input("Введите количество строк: ")
+while not(rows.isdigit()):
+    rows=input("Введите количество строк: ")
+columns=input("Введите количество столбцов: ")
+while not(columns.isdigit()):
+    columns=input("Введите количество столбцов: ")
+print_operation_table(lambda x,y: x*y,int(rows),int(columns))
+
+
+
+
+
+
 
