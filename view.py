@@ -1,5 +1,5 @@
 import text
-file_name=''
+
 def main_menu1() -> int:
     print(text.main_menu1)
     while True:
@@ -13,7 +13,6 @@ def main_menu2() -> int:
         if choice.isdigit() and 0 < int(choice)<9:
             return int(choice)
 def read_name_file ():
-    global file_name
     file_name=input(text.input_file)
     return file_name
 
